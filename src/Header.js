@@ -38,7 +38,7 @@ function Header({photoURL}) {
             {/* <FontAwesomeIcon icon={faGrip} /> */}
             {/* {AppsIcon} */}
             <AppsIcon/>
-            <img src={photoURL}/>
+            <img src={photoURL} alt="userlogo"/>
             {/* <AccountCircleIcon src={photoURL}/> */}
           </span>
         </div>
