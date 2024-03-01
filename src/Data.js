@@ -73,7 +73,7 @@ function Data() {
             {
               files.map((file) => {
                 return <div className="detailsRow">
-                <a href={file.data.fileURL} target="_blank"><InsertDriveFile/>{file.data.filename}</a>
+                <a href={file.data.fileURL} target="_blank" rel="noreferrer"><InsertDriveFile/>{file.data.filename}</a>
                 <p>Me</p>
                 {/* <p>{new Date(file.data.timestamp)}</p> */}
                 {/* <p>{file.data.size}</p> */}
