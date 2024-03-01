@@ -61,7 +61,7 @@
 }
 .header__search input::placeholder{
     font-size: 1.1rem;
-    /* font-family: 'Poppins'; */
+    font-family: 'Poppins';
 }
 .header__icons{
     display: flex;
