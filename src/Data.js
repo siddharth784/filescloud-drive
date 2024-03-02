@@ -54,10 +54,12 @@ function Data() {
           <div  className="data_grid">
             {
               files.map((file)=>{
-                return <div className="data__file">
+                return <a href={file.data.fileURL} target='_blank' rel='noreferror'>
+                        <div className="data__file">
                           <InsertDriveFile/>
                           <p>{file.data.filename}</p>
                         </div>
+                       </a>
               })
             }            
           </div>
@@ -73,8 +75,10 @@ function Data() {
             {
               files.map((file) => {
                 return <div className="detailsRow">
-                <a href={file.data.fileURL} target="_blank" rel="noreferrer"><InsertDriveFile/>{file.data.filename}</a>
+                <a href={file.data.fileURL} target="_blank" rel="noreferror"><InsertDriveFile/>{file.data.filename}</a>
                 <p>Me</p>
+                <p></p>
+                <p></p>
                 {/* <p>{new Date(file.data.timestamp)}</p> */}
                 {/* <p>{file.data.size}</p> */}
                 </div>
