@@ -1,5 +1,7 @@
 *{
   margin: 0; 
+  -webkit-transition: all .2s linear;
+  transition: all .2s linear;
 }
 
 body {
@@ -10,8 +12,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',monospace;
 }
 .App{
   /* display: grid;
@@ -27,6 +28,7 @@ code {
   padding: 10px;
 }
 .loginWrap{
+  cursor: pointer ;
   background: whitesmoke;
   padding: 20px;
   width: 500px;

@@ -1,6 +1,8 @@
 .data{
     flex: 1;
     padding: 10px 0 0 20px;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 .data__header{
     display: flex;
@@ -16,11 +18,18 @@
 .data__headerRight{
     margin: 0 10px;
 }
+.data__headerRight svg{
+    padding-right: 16px;
+}
 .data_grid{
     display: flex;
     align-items: center;
     margin-top: 30px;
     margin-bottom: 30px;
+    overflow-x: auto;
+}
+.data_grid a{
+    text-decoration: none;    
 }
 .data__file{
     text-align: center;
@@ -37,18 +46,45 @@
 .data__file p{
     border-top: 1px solid #ccc;
     margin-top: 5px;
-    font-size: 12px;
+    font-size: 13px;
+    padding: 4px;
+    text-align: center;
+    /* vertical-align: baseline; */
     background-color: whitesmoke;
     padding: 10px 0;
+    overflow: hidden;
+    min-height: 26px;
+    max-height: 26px;
+    max-width: 250px;
 }
-.detailsRow{
+.detailsRow td{
+    background: whitesmoke;
+    border-radius: 30px;
+}
+.detailsRow td, .detailsRow th{
+    /* display: flex;
+    align-items: baseline;
+    justify-content: space-between; */
+    /* border-bottom: 1px solid #ccc !important; */
+    /* background-color: red; */
+    /* padding-top: 44px !important; */
+}
+.detailsRow th{
+    text-align: center;
+    padding-bottom: 8px;
+}
+.detailsRow td{
+    height: 48px;
+    text-align: center;
+}
+.detailsRow a{
+    text-decoration: none;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
+    /* display:contents; */
+    /* align-items: center; */
 }
-.detailsRow p svg{ 
-    font-size: 22px;
+.detailsRow td svg{ 
+    /* font-size: 12px; */
     margin: 10px;
 }

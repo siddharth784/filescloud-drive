@@ -3,7 +3,7 @@
 // import 'firebase/storage' from firebase;  
 import { initializeApp } from 'firebase/app';
 // import { getFirestore } from 'firebase/firestore/lite';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, Timestamp } from 'firebase/firestore';
 import { doc, setDoc, addDoc, collection, onSnapshot } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
@@ -27,5 +27,6 @@ const firebaseConfig = {
   const auth=getAuth(firebaseApp);
 //   const provider=new auth.GoogleAuthProvider();
   const provider=GoogleAuthProvider;
-  export {db,storage,doc,setDoc,addDoc,collection,onSnapshot,ref,uploadBytes,auth,provider}
+  const currtime=Timestamp;
+  export {firebaseApp,db,storage,doc,setDoc,addDoc,collection,onSnapshot,ref,uploadBytes,auth,provider,currtime}
 //   export {db, storage, auth}

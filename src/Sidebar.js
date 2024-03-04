@@ -8,10 +8,23 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
-import { Modal } from '@mui/material';
-import {db,storage,doc,setDoc,addDoc,collection,onSnapshot,ref,uploadBytes,auth,provider} from './firebase';
+import { Modal, Fade, Grow, Slide, Zoom } from '@mui/material';
+import {firebaseApp,currtime,db,storage,doc,setDoc,addDoc,collection,onSnapshot,ref,uploadBytes,auth,provider} from './firebase';
 import {getDownloadURL} from "firebase/storage"
-// import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import { userid } from './App';
+import { SnapshotMetadata, serverTimestamp } from 'firebase/firestore';
+
+function formatFileSize(fileSizeInBytes) {
+  if (fileSizeInBytes < 1024) {
+    return fileSizeInBytes + ' bytes';
+  } else if (fileSizeInBytes < 1024 * 1024) {
+    return (fileSizeInBytes / 1024).toFixed(2) + ' KB';
+  } else if (fileSizeInBytes < 1024 * 1024 * 1024) {
+    return (fileSizeInBytes / (1024 * 1024)).toFixed(2) + ' MB';
+  } else {
+    return (fileSizeInBytes / (1024 * 1024 * 1024)).toFixed(2) + ' GB';
+  }
+}
 
 function Sidebar() {
   const [open,setOpen]=useState(false);
@@ -23,20 +36,17 @@ function Sidebar() {
   const handleOpen=()=>{
     setOpen(true);
   }
-  const handleChange=(e)=>{
+  const handleChange=(e)=>{ //for if the selected/browsed file is changed again before clicking upload
     if(e.target.files[0])
     {
       setFile(e.target.files[0]);
-      // console.log(e.target.files[0]);
     }
   }
-  // storage.ref
+
   const handleUpload=(e)=>{
     e.preventDefault();
     setUploading(true);
-    const storageRef=ref(storage);
     const spaceRef=ref(storage, `files/${file.name}`);
-
     
     uploadBytes(spaceRef,file).then((snapshot) => {
       // spaceRef.putFile(file).then((snapshot) =>{
@@ -44,45 +54,47 @@ function Sidebar() {
       getDownloadURL(spaceRef).then(url=>{
         // const docRef = setDoc(doc(db, "myfiles"), {
 
-        addDoc(collection(db, "myfiles"), { //https://www.youtube.com/watch?v=v_hR4K4auoQ&list=LL&index=3&t=690s&pp=gAQBiAQB https://firebase.google.com/docs/firestore/manage-data/structure-data https://firebase.google.com/docs/firestore/data-model
+        addDoc(collection(db, userid), { //https://www.youtube.com/watch?v=v_hR4K4auoQ&list=LL&index=3&t=690s&pp=gAQBiAQB https://firebase.google.com/docs/firestore/manage-data/structure-data https://firebase.google.com/docs/firestore/data-model
           filename:file.name,
           fileURL:url,
           // timestamp: db.Timestamp().fromDate(new Date())
           // timestamp: ServerValue.TIMESTAMP
           // size:snapshot._delegate.bytesTransferred()
           // size: file.data().storage
+          size: formatFileSize(file.size),
+          // uploadTime: firebaseApp.Timestamp.now()
         });
         // console.log("Document written with ID: ", docRef.id);
         setUploading(false);
         setFile(null);
         setOpen(false);
       })
-      ref(storageRef.child)
     });
   }
 
 
-  return (
-        
+  return (   
     <>
     <Modal open={open} onClose={handleClose}>
-      <div className="modal_pop">
-        <form>
-          <div className="modalHeading">
-            <h3>Select file you want to upload</h3>
-          </div>
+      <Zoom in={open}>
+        <div className="modal_pop">
+          <form>
+            <div className="modalHeading">
+              <h3>Select file you want to upload</h3>
+            </div>
 
-          <div className="modalBody">
-            {
-              uploading ? (<p className="uploading">Uploading...</p>) : (
-            <>
-              <input type="file" onChange={handleChange}/>
-              <input type="submit" className="post_submit" onClick={handleUpload}/>
-            </>)
-            }
-          </div>
-        </form>
-      </div>
+            <div className="modalBody">
+              {
+                uploading ? (<p className="uploading">Uploading...</p>) : (
+              <>
+                <input type="file" onChange={handleChange}/>
+                <input type="submit" className="post_submit" onClick={handleUpload}/>
+              </>)
+              }
+            </div>
+          </form>
+        </div>
+      </Zoom>
     </Modal>
 
     <div className='sidebar'>
