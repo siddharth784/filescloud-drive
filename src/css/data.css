@@ -60,6 +60,7 @@
 .detailsRow td{
     background: whitesmoke;
     border-radius: 30px;
+    overflow: hidden;
 }
 .detailsRow td, .detailsRow th{
     /* display: flex;
